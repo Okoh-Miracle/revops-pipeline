@@ -1,0 +1,9 @@
+name,status,whats_working,automations,dashboard,tools
+"ListKit Cold Email (Interested Leads)",Running,"Steady replies, automations live, tracking started","ListKit → Airtable sync, lead tag & timestamp","Airtable dashboard live","ListKit, Airtable, Gmail, Zapier, Slack optional"
+"ListKit Intent Leads",Running,"Fast lead detection, reminders, auto-notify working","Auto-tag intent leads, reminder system live","Airtable dashboard live","ListKit, Airtable, Zapier, Gmail, Slack optional"
+"Realtor.com SMS",Relaunched,"Portal functioning, SMS drip logic ready","Reminders + logic in place","v0 portal dashboard live","v0 app, AirDroid"
+"Meta Ad Campaign",Inactive,"Funnel logic mapped, past campaigns reviewed",Planned,Pending,"Meta Ads, Zapier/n8n/Make, Airtable"
+"Google PPC Campaign",Inactive,"High scalability potential",Planned,Pending,"Google Ads, Zapier/n8n/Make, Airtable"
+"Instagram Inbox",Active,"VA → BDR handoff working, follow-ups triggered","Manual entry → reminders live","Airtable Follow-Up board","Instagram, Airtable, Make"
+"Social Posting (IG, Pinterest, LinkedIn)","Initial Setup","Fields mapped, logic planned","Planned (webhook/project data)",Pending,"Airtable, Portal, Make, Buffer/Later"
+"Customer Email Marketing","Strategy Built","Segments + content plan scoped","Not yet",Pending,"Airtable, Klaviyo planned, Make"

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RevOps Pipeline</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">RO</div><div><div class="brand-title">RevOps Pipeline</div><div class="brand-sub">Real Estate</div></div></div>
+    <button class="primary-btn" id="addLeadBtn">＋ Add lead</button>
+    <nav class="nav">
+      <button class="nav-item active" data-view="dashboard">▦ Dashboard</button>
+      <button class="nav-item" data-view="pipeline">⌁ Pipeline</button>
+      <button class="nav-item" data-view="followups">◷ Follow-ups</button>
+      <button class="nav-item" data-view="campaigns">◌ Campaigns</button>
+      <button class="nav-item" data-view="leads">☷ Lead records</button>
+    </nav>
+    <div class="sidebar-section">Views</div>
+    <button class="nav-item compact" data-filter="Hot">● Hot leads <span class="count-badge">8</span></button>
+    <button class="nav-item compact" data-filter="Intent">● Intent <span class="count-badge">12</span></button>
+    <button class="nav-item compact" data-filter="Follow-Up Due">● Follow-up due <span class="count-badge">5</span></button>
+    <div class="sidebar-footer"><div class="sync-dot"></div><span>CRM synced</span><span class="sync-time">just now</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">SALES OPERATIONS</div><h1 id="pageTitle">Dashboard</h1><div class="breadcrumb">RevOps Pipeline <span>›</span> <span id="crumb">Overview</span></div></div>
+      <div class="top-actions"><button class="ghost-btn" id="exportCsvBtn">Export CSV</button><button class="avatar" title="Account">MO</button></div>
+    </header>
+
+    <section id="dashboardView" class="view">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Lead volume</div><div class="kpi-value" id="kpiLeads">48</div><div class="kpi-meta">Across 4 active sources</div></div>
+        <div class="kpi"><div class="kpi-label">Response rate</div><div class="kpi-value">72%</div><div class="kpi-meta up">+8 pts vs. prior period</div></div>
+        <div class="kpi"><div class="kpi-label">Avg. follow-up</div><div class="kpi-value">2h 14m</div><div class="kpi-meta">Reminder logic active</div></div>
+        <div class="kpi"><div class="kpi-label">Meetings booked</div><div class="kpi-value" id="kpiMeetings">14</div><div class="kpi-meta">29% of qualified leads</div></div>
+        <div class="kpi"><div class="kpi-label">Conversion rate</div><div class="kpi-value">18.4%</div><div class="kpi-meta">Lead → meeting</div></div>
+      </div>
+
+      <div class="grid-2">
+        <section class="card tall"><div class="card-head"><div><h2>Pipeline by stage</h2><p>Current lead distribution</p></div><span class="status-chip">Live</span></div>
+          <div class="pipeline-bars" id="stageBars"></div>
+        </section>
+        <section class="card tall"><div class="card-head"><div><h2>Lead sources</h2><p>Channel mix</p></div><select id="sourcePeriod" class="select"><option>This period</option><option>Last period</option></select></div>
+          <div id="sourceChart" class="bar-chart"></div>
+          <div class="legend"><span><i class="dot ig"></i> Instagram</span><span><i class="dot rr"></i> Realtor.com SMS</span><span><i class="dot lk"></i> ListKit</span><span><i class="dot ma"></i> Meta Ads</span></div>
+        </section>
+      </div>
+
+      <section class="card"><div class="card-head"><div><h2>Follow-up board</h2><p>Prioritized handoff between VA and BDR</p></div><button class="ghost-btn small" data-view="followups">View all</button></div>
+        <div class="kanban" id="followupBoard"></div>
+      </section>
+
+      <section class="card"><div class="card-head"><div><h2>Campaign performance</h2><p>Campaign status and automation readiness</p></div><button class="ghost-btn small" data-view="campaigns">Open campaigns</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Campaign</th><th>Status</th><th>Automations</th><th>Dashboard</th><th>Tooling</th></tr></thead><tbody id="campaignTable"></tbody></table></div>
+      </section>
+    </section>
+
+    <section id="pipelineView" class="view hidden">
+      <div class="toolbar"><div class="filters"><select id="statusFilter" class="select"><option value="All">All stages</option></select><select id="qualityFilter" class="select"><option value="All">All quality</option><option>Intent</option><option>Hot</option><option>Warm</option><option>Cold</option><option>Ghosted</option></select><select id="sourceFilter" class="select"><option value="All">All sources</option></select></div><div class="toolbar-right"><span class="result-count" id="pipelineCount"></span></div></div>
+      <div class="pipeline-grid" id="pipelineGrid"></div>
+    </section>
+
+    <section id="followupsView" class="view hidden">
+      <div class="toolbar"><div><h2 class="section-title">Follow-up queue</h2><p class="section-sub">Reminders are scheduled from first-contact dates.</p></div><div class="toolbar-right"><button class="ghost-btn" id="notifyBtn">Send BDR reminder</button></div></div>
+      <section class="card"><div class="table-wrap"><table><thead><tr><th>Lead</th><th>Source</th><th>Quality</th><th>Next follow-up</th><th>Owner</th><th>Stage</th><th></th></tr></thead><tbody id="followupTable"></tbody></table></div></section>
+    </section>
+
+    <section id="campaignsView" class="view hidden">
+      <div class="campaign-grid" id="campaignCards"></div>
+    </section>
+
+    <section id="leadsView" class="view hidden">
+      <div class="toolbar"><div><h2 class="section-title">Lead records</h2><p class="section-sub">Central CRM record list.</p></div><div class="toolbar-right"><input id="searchInput" class="search" placeholder="Search leads…" /><span class="result-count" id="leadCount"></span></div></div>
+      <section class="card"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Source</th><th>Quality</th><th>Stage</th><th>First contact</th><th>Next follow-up</th><th>Owner</th><th></th></tr></thead><tbody id="leadTable"></tbody></table></div></section>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop hidden" id="recordModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><div><div class="eyebrow">LEAD RECORD</div><h2 id="modalTitle">Lead details</h2></div><button class="icon-btn" id="closeModal">×</button></div>
+    <form id="leadForm">
+      <input type="hidden" id="recordId" />
+      <div class="form-grid">
+        <label>Name<input id="fName" required /></label>
+        <label>Source<select id="fSource"><option>Instagram</option><option>Realtor.com SMS</option><option>ListKit</option><option>Meta Ads</option></select></label>
+        <label>Quality<select id="fQuality"><option>Intent</option><option>Hot</option><option>Warm</option><option>Cold</option><option>Ghosted</option></select></label>
+        <label>Stage<select id="fStage"></select></label>
+        <label>First contact<input id="fFirst" type="date" required /></label>
+        <label>Next follow-up<input id="fNext" type="date" required /></label>
+        <label>Owner<input id="fOwner" /></label>
+        <label>Notes<textarea id="fNotes" rows="3"></textarea></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="ghost-btn" id="cancelBtn">Cancel</button><div><button type="button" class="ghost-btn" id="exportRecordBtn">Export record</button><button type="submit" class="primary-btn">Save changes</button></div></div>
+    </form>
+  </div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
