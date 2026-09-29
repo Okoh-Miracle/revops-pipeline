@@ -4,7 +4,7 @@ A centralized lead-management and sales-operations system designed for a real es
 
 ## Live demo
 
-`https://okoh-miracle.github.io/revops-pipeline/`
+[View Live Demo](https://okoh-miracle.github.io/revops-pipeline/)
 
 ## What this project demonstrates
 
