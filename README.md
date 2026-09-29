@@ -5,6 +5,7 @@ A centralized lead-management and sales-operations system designed for a real es
 ## Live demo
 
 [View Live Demo](https://okoh-miracle.github.io/revops-pipeline/)
+Source project: [RevOps Pipeline on Airtable (Real Estate).](https://www.notion.so/RevOps-Pipeline-Real-Estate-249eeb05119580419c79e4cc1b8d15c1)
 
 ## What this project demonstrates
 
