@@ -25,17 +25,3 @@ This public repository presents a self-contained browser demo using fictional re
 ## Project outcome
 
 The documented project reduced manual reporting time by 80% and gave the team a real-time view of pipeline activity, lead sources and follow-up status.
-
-## Repository structure
-
-```text
-index.html
-styles.css
-app.js
-README.md
-PROJECT_CASE_STUDY.md
-ARCHITECTURE.md
-sample-data/
-docs/
-screenshots/
-```
